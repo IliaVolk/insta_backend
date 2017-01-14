@@ -30,13 +30,13 @@ public class Store implements Serializable{
 
 
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     @JsonView(Views.Stores.class)
     private Place place;
 
 
     @JsonView(Views.Stores.class)
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     private Set<Tag> tags;
 
 

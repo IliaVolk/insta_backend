@@ -1,8 +1,6 @@
 package inproject.view;
 
-/**
- * Created by alexandrmyagkiy on 03.12.16.
- */
+
 public class Views {
     public static class General{}
     public static class Stores extends General{}

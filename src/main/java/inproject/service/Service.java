@@ -6,5 +6,5 @@ public interface Service<T, ID> {
     public List<T> findAll();
     public T add(T toAdd);
     public T update(T toUpdate);
-    public T deleteById(ID id);
+    public Object deleteById(ID id);
 }

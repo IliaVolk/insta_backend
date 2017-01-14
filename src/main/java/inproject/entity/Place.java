@@ -21,10 +21,15 @@ public class Place implements Serializable{
     private String name;
 
 
-    @JsonView(Views.Places.class)
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "place", cascade = CascadeType.ALL)
+    //@JsonView(Views.Places.class)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "place", cascade = CascadeType.MERGE)
     private Set<Store> stores;
 
+    @JsonView(Views.Places.class)
+    public int getSize(){
+        if (stores == null)return 0;
+        return stores.size();
+    }
     public Long getId() {
         return id;
     }

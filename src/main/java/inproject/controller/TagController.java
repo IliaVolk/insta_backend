@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RestController
 @RequestMapping("/rest/tags")
 public class TagController {
@@ -24,6 +25,7 @@ public class TagController {
     }
 
 
+    @JsonView(Views.Stores.class)
     @RequestMapping(method = RequestMethod.POST)
     public Tag add(@RequestBody Tag tag){
         return tagService.add(tag);
@@ -31,13 +33,14 @@ public class TagController {
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
-    public Tag delete(@PathVariable Long id){
+    public Object delete(@PathVariable Long id){
         return tagService.deleteById(id);
     }
 
 
+    @JsonView(Views.Stores.class)
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
-    public Tag update(@RequestBody Tag tag){
+    public Tag update(@RequestBody Tag tag, @PathVariable Long id){
         return tagService.update(tag);
     }
 }

@@ -23,21 +23,20 @@ public class StoreController {
         return storeService.findAll();
     }
 
-
+    @JsonView(Views.Stores.class)
     @RequestMapping(method = RequestMethod.POST)
     public Store add(@RequestBody Store store){
         return storeService.add(store);
     }
 
-
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
-    public Store delete(@PathVariable Long id){
+    public Object delete(@PathVariable Long id){
         return storeService.deleteById(id);
     }
 
-
+    @JsonView(Views.Stores.class)
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
-    public Store update(@RequestBody Store store){
+    public Store update(@RequestBody Store store,@PathVariable Long id){
         return storeService.update(store);
     }
 }

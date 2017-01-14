@@ -21,11 +21,15 @@ public class Tag implements Serializable{
     private String name;
 
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "tags")
-    @JsonView(Views.Tags.class)
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "tags", cascade = CascadeType.DETACH)
+    //@JsonView(Views.Tags.class)
     private Set<Store> stores;
 
-
+    @JsonView(Views.Tags.class)
+    public int getSize(){
+        if (stores == null)return 0;
+        return this.stores.size();
+    }
     public Long getId() {
         return id;
     }

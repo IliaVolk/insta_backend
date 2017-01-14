@@ -29,8 +29,8 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
-    public Store deleteById(Long id) {
+    public Object deleteById(Long id) {
         storeRepository.delete(id);
-        return null;
+        return id;
     }
 }
