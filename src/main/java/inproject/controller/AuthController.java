@@ -21,7 +21,8 @@ public class AuthController {
     private final String CLIENT_ID = "d5b5c40c8a5b4fff997b641da78b49d7";
     private final String CLIENT_SECRET = "d40602af48cd4534adf19ae5aca93b56";
     private final String GRANT_TYPE = "authorization_code";
-    private final String REDIRECT_URL = "http://localhost:8080/rest/auth/instagram/callback";
+	private final String REDIRECT_URL = "https://polar-crag.herokuapp.com/rest/auth/instagram/callback";
+    //private final String REDIRECT_URL = "http://localhost:8080/rest/auth/instagram/callback";
     private HttpClient client = new DefaultHttpClient();
     private final String URL = "https://api.instagram.com/oauth/access_token";
     private ObjectMapper mapper = new ObjectMapper();
