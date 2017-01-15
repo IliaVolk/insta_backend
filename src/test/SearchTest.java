@@ -1,4 +1,4 @@
-import inproject.Application;
+/*import inproject.Application;
 import inproject.controller.StoreController;
 import inproject.entity.Place;
 import inproject.entity.Store;
@@ -122,4 +122,4 @@ public class SearchTest {
         assertEquals(Arrays.asList(store3, store4), stores);
     }
 
-}
+}*/
