@@ -16,7 +16,7 @@ public class Config {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
                         //.allowedOrigins("**")
-                        .allowedOrigins("http://localhost:6500", "*")
+                        .allowedOrigins("http://localhost:6500", "https://enigmatic-ocean-11372.herokuapp.com", "*")
                         .allowedMethods("DELETE", "PUT", "POST", "GET", "OPTIONS");
             }
         };
