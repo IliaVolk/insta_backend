@@ -42,10 +42,17 @@ public class Store implements Serializable{
 
         Store store = (Store) o;
 
-        if (!id.equals(store.id)) return false;
-        if (!name.equals(store.name)) return false;
+        if (id != null ? !id.equals(store.id) : store.id != null) return false;
+        if (name != null ? !name.equals(store.name) : store.name != null) return false;
 
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
     }
 
     @Override
@@ -56,18 +63,20 @@ public class Store implements Serializable{
                 '}';
     }
 
-    @Override
-    public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + name.hashCode();
-        return result;
-    }
+
 
     @JsonView(Views.Stores.class)
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
-
     private Set<Tag> tags;
 
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public String getUrl() {
         return url;

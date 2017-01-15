@@ -31,6 +31,7 @@ public class Place implements Serializable{
         return stores.size();
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -38,16 +39,16 @@ public class Place implements Serializable{
 
         Place place = (Place) o;
 
-        if (!id.equals(place.id)) return false;
-        if (!name.equals(place.name)) return false;
+        if (id != null ? !id.equals(place.id) : place.id != null) return false;
+        if (name != null ? !name.equals(place.name) : place.name != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + name.hashCode();
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
     }
 
