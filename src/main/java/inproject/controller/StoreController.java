@@ -2,12 +2,10 @@ package inproject.controller;
 
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.sun.istack.internal.Nullable;
 import inproject.entity.Store;
 import inproject.service.StoreService;
 import inproject.view.Views;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -45,8 +43,8 @@ public class StoreController {
 
     @JsonView(Views.Stores.class)
     @RequestMapping(method = RequestMethod.GET, value = "/search")
-    public List<Store> search(@Nullable @RequestParam(value = "tags", required = false) String tags,
-                              @Nullable @RequestParam(value = "place", required = false) String place){
+    public List<Store> search(@RequestParam(value = "tags", required = false) String tags,
+                              @RequestParam(value = "place", required = false) String place){
         return this.storeService.search(tags, place);
     }
 }
