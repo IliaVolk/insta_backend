@@ -21,8 +21,8 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = Application.class)
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@SpringApplicationConfiguration(classes = Application.class)
 public class SearchTest {
 
     @Autowired
