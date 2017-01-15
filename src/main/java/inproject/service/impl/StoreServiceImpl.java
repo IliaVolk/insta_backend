@@ -2,12 +2,16 @@ package inproject.service.impl;
 
 
 import inproject.entity.Store;
+import inproject.entity.StoreSearchResponse;
 import inproject.repository.StoreRepository;
 import inproject.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class StoreServiceImpl implements StoreService {
@@ -32,5 +36,24 @@ public class StoreServiceImpl implements StoreService {
     public Object deleteById(Long id) {
         storeRepository.delete(id);
         return id;
+    }
+
+    @Override
+    public List<Store> search(String tagsString, String place) {
+        if (tagsString == null && place == null){
+            return storeRepository.findAll();
+        }
+
+        if (tagsString != null){
+            Set<String> tags = Stream.of(tagsString.split(",")).collect(Collectors.toSet());
+            if (place == null){
+                return storeRepository.search(tags).sorted().map(StoreSearchResponse::getStore).collect(Collectors.toList());
+            }else{
+                return storeRepository.search(tags, place).sorted().map(StoreSearchResponse::getStore).collect(Collectors.toList());
+            }
+        }else{
+            return storeRepository.search(place);
+        }
+
     }
 }

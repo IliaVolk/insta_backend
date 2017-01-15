@@ -16,12 +16,12 @@ public class Tag implements Serializable{
     private Long id;
 
 
-    @Column(name = "name")
+    @Column(name = "name", unique = true, nullable = false)
     @JsonView(Views.General.class)
     private String name;
 
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "tags", cascade = CascadeType.DETACH)
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "tags", cascade = CascadeType.DETACH)
     //@JsonView(Views.Tags.class)
     private Set<Store> stores;
 
@@ -30,6 +30,27 @@ public class Tag implements Serializable{
         if (stores == null)return 0;
         return this.stores.size();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Tag)) return false;
+
+        Tag tag = (Tag) o;
+
+        if (!id.equals(tag.id)) return false;
+        if (!name.equals(tag.name)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + name.hashCode();
+        return result;
+    }
+
     public Long getId() {
         return id;
     }

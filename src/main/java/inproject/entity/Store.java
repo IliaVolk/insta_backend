@@ -35,8 +35,37 @@ public class Store implements Serializable{
     private Place place;
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Store)) return false;
+
+        Store store = (Store) o;
+
+        if (!id.equals(store.id)) return false;
+        if (!name.equals(store.name)) return false;
+
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Store{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + name.hashCode();
+        return result;
+    }
+
     @JsonView(Views.Stores.class)
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+
     private Set<Tag> tags;
 
 

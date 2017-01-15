@@ -16,13 +16,13 @@ public class Place implements Serializable{
     private Long id;
 
 
-    @Column(name = "name")
+    @Column(name = "name", unique = true, nullable = false)
     @JsonView(Views.General.class)
     private String name;
 
 
     //@JsonView(Views.Places.class)
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "place", cascade = CascadeType.MERGE)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "place", cascade = CascadeType.MERGE)
     private Set<Store> stores;
 
     @JsonView(Views.Places.class)
@@ -30,6 +30,27 @@ public class Place implements Serializable{
         if (stores == null)return 0;
         return stores.size();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Place)) return false;
+
+        Place place = (Place) o;
+
+        if (!id.equals(place.id)) return false;
+        if (!name.equals(place.name)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + name.hashCode();
+        return result;
+    }
+
     public Long getId() {
         return id;
     }
