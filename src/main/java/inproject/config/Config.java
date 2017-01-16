@@ -18,6 +18,7 @@ public class Config {
                         //.allowedOrigins("**")
                         .allowedOrigins("http://localhost:6500", "https://enigmatic-ocean-11372.herokuapp.com", "*")
                         .allowedMethods("DELETE", "PUT", "POST", "GET", "OPTIONS");
+
             }
         };
     }

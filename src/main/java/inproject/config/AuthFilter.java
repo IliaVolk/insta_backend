@@ -27,11 +27,17 @@ public class AuthFilter extends OncePerRequestFilter {
             return;
         }
         String authHeader = request.getHeader("Authorization");
-        Long id = Long.parseLong(authHeader);
-        if (ADMIN_ID.contains(id)){
-            filterChain.doFilter(request, response);
-            return;
+        try{
+            Long id = Long.parseLong(authHeader);
+            if (ADMIN_ID.contains(id)){
+                filterChain.doFilter(request, response);
+                return;
+            }
+        }catch (NumberFormatException e){
+            response.setStatus(HttpStatus.SC_UNAUTHORIZED);
+            response.getWriter().println("authHeader: "+authHeader + "\n" +e.getMessage());
         }
+
         response.setStatus(HttpStatus.SC_UNAUTHORIZED);
     }
 }
