@@ -24,6 +24,10 @@ public class Tag extends BaseEntity{
     //@JsonView(Views.Tags.class)
     private Set<Store> stores;
 
+    @JsonView({Views.UserInfo.class, Views.Users.class})
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    private InstagramAuthUser user;
+
     @JsonView(Views.Tags.class)
     public int getSize(){
         if (stores == null)return 0;
@@ -50,6 +54,13 @@ public class Tag extends BaseEntity{
         return result;
     }
 
+    public InstagramAuthUser getUser() {
+        return user;
+    }
+
+    public void setUser(InstagramAuthUser user) {
+        this.user = user;
+    }
     public Long getId() {
         return id;
     }

@@ -3,6 +3,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import inproject.view.Views;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
@@ -35,6 +36,10 @@ public class Store extends BaseEntity{
     @JsonView(Views.Stores.class)
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     private Set<Tag> tags;
+
+    @JsonView({Views.UserInfo.class, Views.Users.class})
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    private InstagramAuthUser user;
 
     @Override
     public boolean equals(Object o) {
@@ -98,7 +103,13 @@ public class Store extends BaseEntity{
     public void setName(String name) {
         this.name = name;
     }
+    public InstagramAuthUser getUser() {
+        return user;
+    }
 
+    public void setUser(InstagramAuthUser user) {
+        this.user = user;
+    }
     public Place getPlace() {
         return place;
     }
