@@ -51,8 +51,4 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    @Override
-    public Object deleteById(Long aLong) {
-        throw new UnsupportedOperationException();
-    }
 }
