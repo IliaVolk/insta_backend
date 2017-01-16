@@ -1,11 +1,27 @@
 package inproject.entity;
 
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "users")
 public class InstagramAuthUser {
+
+    @Column
     private String username;
+
+    @Column
     private String bio;
+    @Column
     private String website;
+    @Column
     private String profile_picture;
+    @Column
     private String full_name;
+    @Id
     private long id;
 
     @Override
