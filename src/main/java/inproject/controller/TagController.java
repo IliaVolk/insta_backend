@@ -8,6 +8,7 @@ import inproject.view.Views;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 
@@ -27,8 +28,10 @@ public class TagController {
 
     @JsonView(Views.Stores.class)
     @RequestMapping(method = RequestMethod.POST)
-    public Tag add(@RequestBody Tag tag){
-        return tagService.add(tag);
+    public Tag add(@RequestBody Tag tag, HttpServletRequest request){
+        return tagService.add(tag,
+                (String)request.getAttribute("USER_TYPE"),
+                (Long)request.getAttribute("USER_ID"));
     }
 
 

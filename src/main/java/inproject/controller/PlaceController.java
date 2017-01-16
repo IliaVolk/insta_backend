@@ -7,7 +7,7 @@ import inproject.view.Views;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.View;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 @RestController
 @RequestMapping("/rest/places")
@@ -25,8 +25,10 @@ public class PlaceController {
 
     @JsonView(Views.Places.class)
     @RequestMapping(method = RequestMethod.POST)
-    public Place add(@RequestBody Place place){
-        return placeService.add(place);
+    public Place add(@RequestBody Place place, HttpServletRequest request){
+        return placeService.add(place,
+                (String)request.getAttribute("USER_TYPE"),
+                (Long)request.getAttribute("USER_ID"));
     }
 
 

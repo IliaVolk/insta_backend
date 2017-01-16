@@ -1,10 +1,11 @@
 package inproject.entity;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonView;
+import inproject.view.Views;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -22,7 +23,22 @@ public class InstagramAuthUser {
     @Column
     private String full_name;
     @Id
+    @JsonView(Views.General.class)
     private long id;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.MERGE)
+    @JsonView(Views.Users.class)
+    private List<Store> stores;
+
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.MERGE)
+    @JsonView(Views.Users.class)
+    private List<Tag> tags;
+
+    @JsonView(Views.Users.class)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.MERGE)
+    private List<Place> places;
+
 
     @Override
     public boolean equals(Object o) {
@@ -51,6 +67,30 @@ public class InstagramAuthUser {
         result = 31 * result + (full_name != null ? full_name.hashCode() : 0);
         result = 31 * result + (int) (id ^ (id >>> 32));
         return result;
+    }
+
+    public List<Store> getStores() {
+        return stores;
+    }
+
+    public void setStores(List<Store> stores) {
+        this.stores = stores;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+
+    public List<Place> getPlaces() {
+        return places;
+    }
+
+    public void setPlaces(List<Place> places) {
+        this.places = places;
     }
 
     public String getUsername() {

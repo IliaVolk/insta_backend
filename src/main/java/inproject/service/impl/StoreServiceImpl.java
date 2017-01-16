@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Service
-public class StoreServiceImpl implements StoreService {
+public class StoreServiceImpl extends BaseService<Store, Long> implements StoreService {
     @Autowired
     StoreRepository storeRepository;
     @Override

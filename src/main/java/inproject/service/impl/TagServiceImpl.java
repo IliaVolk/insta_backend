@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class TagServiceImpl implements TagService {
+public class TagServiceImpl extends BaseService<Tag, Long> implements TagService {
     @Autowired
     TagRepository tagRepository;
     @Override

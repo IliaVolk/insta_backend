@@ -9,7 +9,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "places")
-public class Place implements Serializable{
+public class Place extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonView(Views.General.class)
@@ -24,6 +24,8 @@ public class Place implements Serializable{
     //@JsonView(Views.Places.class)
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "place", cascade = CascadeType.MERGE)
     private Set<Store> stores;
+
+
 
     @JsonView(Views.Places.class)
     public int getSize(){
@@ -75,4 +77,5 @@ public class Place implements Serializable{
     public void setStores(Set<Store> stores) {
         this.stores = stores;
     }
+
 }

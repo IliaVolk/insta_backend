@@ -3,12 +3,11 @@ import com.fasterxml.jackson.annotation.JsonView;
 import inproject.view.Views;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Set;
 
 @Entity
 @Table(name = "stores")
-public class Store implements Serializable{
+public class Store extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonView(Views.General.class)
@@ -28,12 +27,14 @@ public class Store implements Serializable{
     private String image;
 
 
-
-
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     @JsonView(Views.Stores.class)
     private Place place;
 
+
+    @JsonView(Views.Stores.class)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+    private Set<Tag> tags;
 
     @Override
     public boolean equals(Object o) {
@@ -64,10 +65,6 @@ public class Store implements Serializable{
     }
 
 
-
-    @JsonView(Views.Stores.class)
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
-    private Set<Tag> tags;
 
 
     public String getImage() {

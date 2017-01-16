@@ -30,9 +30,14 @@ public class AuthFilter extends OncePerRequestFilter {
         try{
             Long id = Long.parseLong(authHeader);
             if (ADMIN_ID.contains(id)){
-                filterChain.doFilter(request, response);
+                request.setAttribute("REQUEST_TYPE", "ADMIN");
                 return;
+            }else{
+                request.setAttribute("REQUEST_TYPE", "USER");
             }
+            request.setAttribute("USER_ID", id);
+            filterChain.doFilter(request, response);
+            return;
         }catch (NumberFormatException e){
             response.setStatus(HttpStatus.SC_UNAUTHORIZED);
             response.getWriter().println("authHeader: "+authHeader + "\n" +e.getMessage());

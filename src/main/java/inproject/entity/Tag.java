@@ -4,12 +4,11 @@ import com.fasterxml.jackson.annotation.JsonView;
 import inproject.view.Views;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Set;
 
 @Entity
 @Table(name = "tags")
-public class Tag implements Serializable{
+public class Tag extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonView(Views.General.class)
@@ -74,4 +73,5 @@ public class Tag implements Serializable{
     public void setStores(Set<Store> stores) {
         this.stores = stores;
     }
+
 }

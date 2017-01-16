@@ -8,6 +8,7 @@ import inproject.view.Views;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -25,8 +26,10 @@ public class StoreController {
 
     @JsonView(Views.Stores.class)
     @RequestMapping(method = RequestMethod.POST)
-    public Store add(@RequestBody Store store){
-        return storeService.add(store);
+    public Store add(@RequestBody Store store, HttpServletRequest request){
+        return storeService.add(store,
+                (String)request.getAttribute("USER_TYPE"),
+                (Long)request.getAttribute("USER_ID"));
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
