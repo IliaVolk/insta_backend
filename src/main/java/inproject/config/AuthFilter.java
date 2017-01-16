@@ -1,7 +1,6 @@
 package inproject.config;
 
 import org.apache.http.HttpStatus;
-import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -13,7 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 
-@Component
+//@Component
 public class AuthFilter extends OncePerRequestFilter {
 
     private final static List<Long> ADMIN_ID = Arrays.asList(4315110671l);

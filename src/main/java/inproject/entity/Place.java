@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonView;
 import inproject.view.Views;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Set;
 
 @Entity
