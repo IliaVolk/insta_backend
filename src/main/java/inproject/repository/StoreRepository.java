@@ -13,9 +13,12 @@ import java.util.stream.Stream;
 
 public interface StoreRepository extends JpaRepository<Store, Long> {
 
-    @Query("select new inproject.entity.StoreSearchResponse(s, count(s.id))" +
-            "from Store s join s.tags t where s.place.name = :place and t.name in :tags group by s.id")
-    public Stream<StoreSearchResponse> search(
+    @Query(
+    // "select new inproject.entity.StoreSearchResponse(s, count(s.id))" +
+            "select s from Store s join s.tags t where s.place.name = :place " +
+                    "and t.name in :tags group by s.id order by count(s.id) desc ")
+    //public Stream<StoreSearchResponse> search(
+    public List<Store> search(
             @NotNull@Param("tags")Set<String> tags,
             @NotNull@Param("place") String place);
 
@@ -23,7 +26,8 @@ public interface StoreRepository extends JpaRepository<Store, Long> {
     public List<Store> search(
             @NotNull@Param("place") String place);
 
-    @Query("select new inproject.entity.StoreSearchResponse(s, count(s.id))" +
-            "from Store s join s.tags t where t.name in :tags group by s.id ")
-    public Stream<StoreSearchResponse> search(@NotNull@Param("tags") Set<String> tags);
+    @Query(
+            //"select new inproject.entity.StoreSearchResponse(s, count(s.id))" +
+            "select s from Store s join s.tags t where t.name in :tags group by s.id order by count(s.id) desc")
+    public List<Store> search(@NotNull@Param("tags") Set<String> tags);
 }

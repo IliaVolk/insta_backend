@@ -2,7 +2,6 @@ package inproject.service.impl;
 
 
 import inproject.entity.Store;
-import inproject.entity.StoreSearchResponse;
 import inproject.repository.StoreRepository;
 import inproject.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,9 +46,11 @@ public class StoreServiceImpl extends BaseService<Store, Long> implements StoreS
         if (tagsString != null){
             Set<String> tags = Stream.of(tagsString.split(",")).collect(Collectors.toSet());
             if (place == null){
-                return storeRepository.search(tags).sorted().map(StoreSearchResponse::getStore).collect(Collectors.toList());
+                return storeRepository.search(tags);
+                //return storeRepository.search(tags).sorted().map(StoreSearchResponse::getStore).collect(Collectors.toList());
             }else{
-                return storeRepository.search(tags, place).sorted().map(StoreSearchResponse::getStore).collect(Collectors.toList());
+                return storeRepository.search(tags, place);
+                //return storeRepository.search(tags, place).sorted().map(StoreSearchResponse::getStore).collect(Collectors.toList());
             }
         }else{
             return storeRepository.search(place);

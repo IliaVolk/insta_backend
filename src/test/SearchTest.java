@@ -82,7 +82,7 @@ public class SearchTest {
         store3 = storeRepository.save(store3);
         store4 = new Store();
         store4.setName("store4");
-        store4.setTags(new HashSet<>(Arrays.asList(tag3)));
+        store4.setTags(new HashSet<>(Arrays.asList(tag2, tag3)));
         store4.setPlace(place2);
         store4 = storeRepository.save(store4);
 
@@ -115,13 +115,14 @@ public class SearchTest {
         String tagString2 = tag1.getName()+","+tag2.getName();
         stores = storeController.search(tagString2, null);
         assertEquals(store1, stores.get(0));
-        assertEquals(Arrays.asList(store1, store2, store3), stores);//непонятно почему сначала 3 а потом 2
+        assertEquals(Arrays.asList(store1, store2, store4, store3), stores);
     }
     @Test
     public void testTagsPlace() throws Exception{
         String tagString1 = tag3.getName()+","+tag2.getName();
         List<Store> stores = storeController.search(tagString1, place2.getName());
-        assertEquals(Arrays.asList(store3, store4), stores);
+        assertEquals(store4, stores.get(0));
+        assertEquals(Arrays.asList(store4, store3), stores);
     }
 
 }
