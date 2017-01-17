@@ -21,7 +21,7 @@ public class Place extends BaseEntity{
 
 
     //@JsonView(Views.Places.class)
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "place", cascade = CascadeType.MERGE)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "place", cascade = CascadeType.DETACH)
     private Set<Store> stores;
 
     @JsonView({Views.UserInfo.class, Views.Users.class})

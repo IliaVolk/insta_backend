@@ -1,4 +1,4 @@
-/*import inproject.Application;
+import inproject.Application;
 import inproject.controller.StoreController;
 import inproject.entity.Place;
 import inproject.entity.Store;
@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Arrays;
@@ -21,8 +22,9 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 
-//@RunWith(SpringJUnit4ClassRunner.class)
-//@SpringApplicationConfiguration(classes = Application.class)
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringApplicationConfiguration(classes = Application.class)
+@TestPropertySource(locations="classpath:test.properties")
 public class SearchTest {
 
     @Autowired
@@ -113,7 +115,7 @@ public class SearchTest {
         String tagString2 = tag1.getName()+","+tag2.getName();
         stores = storeController.search(tagString2, null);
         assertEquals(store1, stores.get(0));
-        assertEquals(Arrays.asList(store1, store3, store2), stores);//непонятно почему сначала 3 а потом 2
+        assertEquals(Arrays.asList(store1, store2, store3), stores);//непонятно почему сначала 3 а потом 2
     }
     @Test
     public void testTagsPlace() throws Exception{
@@ -122,4 +124,4 @@ public class SearchTest {
         assertEquals(Arrays.asList(store3, store4), stores);
     }
 
-}*/
+}

@@ -3,7 +3,6 @@ import com.fasterxml.jackson.annotation.JsonView;
 import inproject.view.Views;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Set;
 
 @Entity
@@ -34,7 +33,7 @@ public class Store extends BaseEntity{
 
 
     @JsonView(Views.Stores.class)
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH})
     private Set<Tag> tags;
 
     @JsonView({Views.UserInfo.class, Views.Users.class})

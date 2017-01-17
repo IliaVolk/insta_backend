@@ -20,7 +20,7 @@ public class Tag extends BaseEntity{
     private String name;
 
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "tags", cascade = CascadeType.DETACH)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     //@JsonView(Views.Tags.class)
     private Set<Store> stores;
 
