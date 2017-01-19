@@ -47,7 +47,10 @@ public class StoreController {
     @JsonView(Views.Stores.class)
     @RequestMapping(method = RequestMethod.GET, value = "/search")
     public List<Store> search(@RequestParam(value = "tags", required = false) String tags,
-                              @RequestParam(value = "place", required = false) String place){
-        return this.storeService.search(tags, place);
+                              @RequestParam(value = "place", required = false) String place,
+                              @RequestParam(value = "skip", required = false, defaultValue = "0") int skip,
+                              @RequestParam(value = "limit", required = false, defaultValue = "10") int limit){
+
+        return this.storeService.search(tags, place, skip, limit);
     }
 }

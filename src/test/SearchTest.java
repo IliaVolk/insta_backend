@@ -93,34 +93,38 @@ public class SearchTest {
     }
     @Test
     public void testNoParameters() throws Exception {
-        List<Store> stores =  storeController.search(null, null);
+        List<Store> stores =  storeController.search(null, null, 0, 10);
         assertEquals(Arrays.asList(store1, store2, store3, store4), stores);
     }
     @Test
     public void testPlace() throws Exception{
         String placeName1 = place1.getName();
         String placeName2 = place2.getName();
-        List<Store> stores = storeController.search(null, placeName1);
+        List<Store> stores = storeController.search(null, placeName1, 0, 10);
         assertEquals(Arrays.asList(store1, store2), stores);
 
-        stores = storeController.search(null, placeName2);
+        stores = storeController.search(null, placeName2, 0, 10);
         assertEquals(Arrays.asList(store3, store4), stores);
     }
     @Test
     public void testTags() throws Exception{
         String tagString1 = tag1.getName();
-        List<Store> stores = storeController.search(tagString1, null);
+        List<Store> stores = storeController.search(tagString1, null, 0, 10);
         assertEquals(stores, Arrays.asList(store1, store2));
 
         String tagString2 = tag1.getName()+","+tag2.getName();
-        stores = storeController.search(tagString2, null);
+        stores = storeController.search(tagString2, null, 0, 10);
         assertEquals(store1, stores.get(0));
         assertEquals(Arrays.asList(store1, store2, store4, store3), stores);
+
+        stores = storeController.search(tagString2, null, 1, 2);
+        assertEquals(store2, stores.get(0));
+        assertEquals(Arrays.asList(store2, store4), stores);
     }
     @Test
     public void testTagsPlace() throws Exception{
         String tagString1 = tag3.getName()+","+tag2.getName();
-        List<Store> stores = storeController.search(tagString1, place2.getName());
+        List<Store> stores = storeController.search(tagString1, place2.getName(), 0, 10);
         assertEquals(store4, stores.get(0));
         assertEquals(Arrays.asList(store4, store3), stores);
     }
