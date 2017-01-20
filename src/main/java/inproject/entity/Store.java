@@ -8,21 +8,17 @@ import java.util.Set;
 @Entity
 @Table(name = "stores")
 public class Store extends BaseEntity{
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @JsonView(Views.General.class)
-    private Long id;
 
-    @Column(name = "url")
+    @Column
     @JsonView(Views.General.class)
     private String url;
 
-    @Column(name = "name")
+    @Column
     @JsonView(Views.General.class)
     private String name;
 
 
-    @Column(name = "image")
+    @Column
     @JsonView(Views.Stores.class)
     private String image;
 
@@ -87,13 +83,6 @@ public class Store extends BaseEntity{
         this.url = url;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

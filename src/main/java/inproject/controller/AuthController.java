@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,17 +43,20 @@ public class AuthController {
     UserService userService;
     @RequestMapping(value = "instagram/url")
     @ResponseBody
-    public Object authInstagramUrl(){
+    public Object authInstagramUrl(HttpServletRequest request){
         class Url{
             public String url;
         }
         Url url = new Url();
-        url.url = "https://api.instagram.com/oauth/authorize/?client_id="+CLIENT_ID+"&redirect_uri="+INSTAGRAM_AUTH_CALLBACK+"&response_type=code";
+        url.url = "https://api.instagram.com/oauth/authorize/?client_id="+
+                CLIENT_ID+"&redirect_uri="+INSTAGRAM_AUTH_CALLBACK+"&response_type=code";
         return url;
     }
     @RequestMapping(value = "instagram/callback", method = RequestMethod.GET)
     @ResponseBody
-    public String authInstagramCodeCallback(@RequestParam("code") String code) throws Exception {
+    public String authInstagramCodeCallback(
+            @RequestParam("code") String code,
+            HttpServletRequest request) throws Exception {
 
         HttpPost post = new HttpPost(URL);
 
@@ -70,8 +74,12 @@ public class AuthController {
 
         InstagramAuthResponse responseObject = mapper.readValue(response.getEntity().getContent(), InstagramAuthResponse.class);
         InstagramAuthUser user = responseObject.getUser();
-        user = userService.saveOrUpdate(user);
-        responseObject.setUser(user);
+        if (user != null){
+            user = userService.saveOrUpdate(user);
+            responseObject.setUser(user);
+        }
+
+
 
         String json = mapper.writeValueAsString(responseObject);
         return "<script>\n" +

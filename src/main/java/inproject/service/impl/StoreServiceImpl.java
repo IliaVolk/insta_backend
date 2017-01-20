@@ -2,6 +2,7 @@ package inproject.service.impl;
 
 
 import inproject.entity.Store;
+import inproject.repository.BaseRepository;
 import inproject.repository.StoreRepository;
 import inproject.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,33 +17,15 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Service
-public class StoreServiceImpl extends BaseService<Store, Long> implements StoreService {
+public class StoreServiceImpl extends BaseService<Store> implements StoreService {
     @Autowired
     StoreRepository storeRepository;
 
     @Autowired
     EntityManager entityManager;
 
-    @Override
-    public List<Store> findAll() {
-        return storeRepository.findAll();
-    }
 
-    @Override
-    public Store add(Store toAdd) {
-        return storeRepository.save(toAdd);
-    }
 
-    @Override
-    public Store update(Store toUpdate) {
-        return storeRepository.saveAndFlush(toUpdate);
-    }
-
-    @Override
-    public Object deleteById(Long id) {
-        storeRepository.delete(id);
-        return id;
-    }
 
     @SuppressWarnings("unchecked")
     public List<Store> search(
@@ -102,5 +85,10 @@ public class StoreServiceImpl extends BaseService<Store, Long> implements StoreS
         } else {
             return search(place, skip, limit);
         }
+    }
+
+    @Override
+    public BaseRepository<Store> getRepository() {
+        return storeRepository;
     }
 }

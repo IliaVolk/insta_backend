@@ -22,6 +22,11 @@ public class InstagramAuthUser {
     private String profile_picture;
     @Column
     private String full_name;
+
+    @Transient
+    private UserType userType;
+
+
     @Id
     @JsonView(Views.General.class)
     private long id;
@@ -139,5 +144,13 @@ public class InstagramAuthUser {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public void setUserType(UserType userType) {
+        this.userType = userType;
     }
 }

@@ -29,8 +29,8 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(toUpdate);
     }
     @Override
-    public boolean exists(InstagramAuthUser user){
-        return userRepository.exists(user.getId());
+    public boolean exists(InstagramAuthUser user) {
+        return user != null && userRepository.exists(user.getId());
     }
     @Override
     public InstagramAuthUser findOne(InstagramAuthUser user){

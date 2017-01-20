@@ -9,13 +9,8 @@ import java.util.Set;
 @Entity
 @Table(name = "places")
 public class Place extends BaseEntity{
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @JsonView(Views.General.class)
-    private Long id;
 
-
-    @Column(name = "name", unique = true, nullable = false)
+    @Column(unique = true, nullable = false)
     @JsonView(Views.General.class)
     private String name;
 
