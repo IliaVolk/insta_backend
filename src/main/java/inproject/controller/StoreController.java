@@ -41,7 +41,7 @@ public class StoreController extends BaseController{
     @JsonView(Views.Stores.class)
     @RequestMapping(method = RequestMethod.POST)
     public Store add(@RequestBody Store store, HttpServletRequest request){
-        return storeService.add(store,(InstagramAuthUser) request.getAttribute("user"));
+        return storeService.add(store,getUser(request));
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")

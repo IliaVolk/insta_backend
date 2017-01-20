@@ -2,7 +2,6 @@ package inproject.controller;
 
 
 import com.fasterxml.jackson.annotation.JsonView;
-import inproject.entity.InstagramAuthUser;
 import inproject.entity.Tag;
 import inproject.entity.UserType;
 import inproject.service.TagService;
@@ -26,7 +25,7 @@ public class TagController extends BaseController {
     @JsonView(Views.Tags.class)
     @RequestMapping(method = RequestMethod.GET)
     public List<Tag> getAll(HttpServletRequest request){
-        return tagService.findAll((InstagramAuthUser) request.getAttribute("user"));
+        return tagService.findAll(getUser(request));
     }
     @RequestMapping(method = RequestMethod.GET, params = "confirmed=false")
     @JsonView(Views.Places.class)
@@ -42,7 +41,7 @@ public class TagController extends BaseController {
     @JsonView(Views.Stores.class)
     @RequestMapping(method = RequestMethod.POST)
     public Tag add(@RequestBody Tag tag, HttpServletRequest request){
-        return tagService.add(tag,(InstagramAuthUser) request.getAttribute("user"));
+        return tagService.add(tag,getUser(request));
     }
 
 

@@ -35,6 +35,7 @@ public class AuthFilter extends OncePerRequestFilter {
         if (method.equals("GET")){
             InstagramAuthUser user = new InstagramAuthUser();
             user.setUserType(UserType.ANONYMOUS);
+            request.setAttribute("user", user);
             filterChain.doFilter(request, response);
             return;
         }
