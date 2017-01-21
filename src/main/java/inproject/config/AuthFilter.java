@@ -22,7 +22,7 @@ public class AuthFilter extends OncePerRequestFilter {
 
     @Autowired
     UserRepository userRepository;
-    private final static List<Long> ADMIN_ID = Arrays.asList(4315110671l);
+    public final static List<Long> ADMIN_ID = Arrays.asList(4315110671l);
 
     private void setUserType(InstagramAuthUser user) {
         if (ADMIN_ID.contains(user.getId())) {

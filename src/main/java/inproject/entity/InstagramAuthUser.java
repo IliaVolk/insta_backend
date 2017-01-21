@@ -28,7 +28,8 @@ public class InstagramAuthUser {
     @JsonView(Views.InstagramAuthResponse.class)
     private String full_name;
 
-    @Transient
+    @Column
+    @Enumerated(EnumType.STRING)
     private UserType userType;
 
 

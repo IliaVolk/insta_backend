@@ -1,8 +1,10 @@
 package inproject.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import inproject.config.AuthFilter;
 import inproject.entity.InstagramAuthResponse;
 import inproject.entity.InstagramAuthUser;
+import inproject.entity.UserType;
 import inproject.service.UserService;
 import inproject.view.Views;
 import org.apache.http.HttpResponse;
@@ -55,9 +57,7 @@ public class AuthController {
     }
     @RequestMapping(value = "instagram/callback", method = RequestMethod.GET)
     @ResponseBody
-    public String authInstagramCodeCallback(
-            @RequestParam("code") String code,
-            HttpServletRequest request) throws Exception {
+    public String authInstagramCodeCallback(@RequestParam("code") String code) throws Exception {
 
         HttpPost post = new HttpPost(URL);
 
@@ -76,6 +76,7 @@ public class AuthController {
         InstagramAuthResponse responseObject = mapper.readValue(response.getEntity().getContent(), InstagramAuthResponse.class);
         InstagramAuthUser user = responseObject.getUser();
         if (user != null){
+            user.setUserType(AuthFilter.ADMIN_ID.contains(user.getId()) ? UserType.ADMIN:UserType.USER);
             user = userService.saveOrUpdate(user);
             responseObject.setUser(user);
         }
