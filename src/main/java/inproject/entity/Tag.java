@@ -20,7 +20,7 @@ public class Tag extends BaseEntity{
     //@JsonView(Views.Tags.class)
     private Set<Store> stores;
 
-    @JsonView({Views.UserInfo.class, Views.Users.class})
+    @JsonView({Views.UserInfo.class})
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     private InstagramAuthUser user;
 

@@ -32,7 +32,7 @@ public class Store extends BaseEntity{
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH})
     private Set<Tag> tags;
 
-    @JsonView({Views.UserInfo.class, Views.Users.class})
+    @JsonView({Views.UserInfo.class})
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     private InstagramAuthUser user;
 

@@ -19,7 +19,7 @@ public class Place extends BaseEntity{
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "place", cascade = CascadeType.DETACH)
     private Set<Store> stores;
 
-    @JsonView({Views.UserInfo.class, Views.Users.class})
+    @JsonView({Views.UserInfo.class})
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     private InstagramAuthUser user;
 
