@@ -12,24 +12,25 @@ import java.util.List;
 public class InstagramAuthUser {
 
     @Column
-    @JsonView(Views.InstagramAuthResponse.class)
+    @JsonView({Views.Users.class, Views.InstagramAuthResponse.class})
     private String username;
 
     @Column
-    @JsonView(Views.InstagramAuthResponse.class)
+    @JsonView({Views.Users.class, Views.InstagramAuthResponse.class})
     private String bio;
     @Column
-    @JsonView(Views.InstagramAuthResponse.class)
+    @JsonView({Views.Users.class, Views.InstagramAuthResponse.class})
     private String website;
     @Column
-    @JsonView(Views.InstagramAuthResponse.class)
+    @JsonView({Views.Users.class, Views.InstagramAuthResponse.class})
     private String profile_picture;
     @Column
-    @JsonView(Views.InstagramAuthResponse.class)
+    @JsonView({Views.Users.class, Views.InstagramAuthResponse.class})
     private String full_name;
 
     @Column
     @Enumerated(EnumType.STRING)
+    @JsonView({Views.Users.class, Views.InstagramAuthResponse.class})
     private UserType userType;
 
 
