@@ -115,7 +115,7 @@ public class SearchTest {
         String tagString2 = tag1.getName()+","+tag2.getName();
         stores = storeController.search(tagString2, null, 0, 10);
         assertEquals(store1, stores.get(0));
-        assertEquals(Arrays.asList(store1, store2, store4, store3), stores);
+        assertEquals(Arrays.asList(store1, store4, store2, store3), stores);
 
         stores = storeController.search(tagString2, null, 1, 2);
         assertEquals(store2, stores.get(0));

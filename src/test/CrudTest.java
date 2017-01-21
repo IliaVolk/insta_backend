@@ -14,11 +14,11 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -125,6 +125,7 @@ public class CrudTest {
         assertEquals(store, found);
         assertEquals(store.getPlace(), found.getPlace());
         assertEquals(store.getTags(), found.getTags());
+        assertFalse(new ArrayList<>(store.getTags()).get(0).getSize() == 0);
     }
     @Test
     public void testUpdateTag(){

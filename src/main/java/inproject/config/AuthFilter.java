@@ -57,6 +57,7 @@ public class AuthFilter extends OncePerRequestFilter {
             }
             response.setStatus(HttpStatus.SC_UNAUTHORIZED);
             response.getWriter().println("authHeader: " + authHeader + "\n" + e.getMessage());
+            return;
         }
         user = userRepository.findOne(id);
         if (user != null) {
