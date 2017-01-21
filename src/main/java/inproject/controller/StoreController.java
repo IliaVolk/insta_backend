@@ -2,7 +2,6 @@ package inproject.controller;
 
 
 import com.fasterxml.jackson.annotation.JsonView;
-import inproject.entity.InstagramAuthUser;
 import inproject.entity.Store;
 import inproject.entity.UserType;
 import inproject.service.StoreService;
@@ -25,7 +24,7 @@ public class StoreController extends BaseController{
     @JsonView(Views.Stores.class)
     @RequestMapping(method = RequestMethod.GET)
     public List<Store> getAll(HttpServletRequest request){
-        return storeService.findAll((InstagramAuthUser) request.getAttribute("user"));
+        return storeService.findAll(getUser(request));
     }
     @RequestMapping(method = RequestMethod.GET, params = "confirmed=false")
     @JsonView(Views.Stores.class)

@@ -12,7 +12,7 @@ import java.util.List;
 public class InstagramAuthUser {
 
     @Column
-    @JsonView({Views.Users.class, Views.InstagramAuthResponse.class})
+    @JsonView({Views.Users.class, Views.InstagramAuthResponse.class, Views.UserInfo.class})
     private String username;
 
     @Column
@@ -25,7 +25,7 @@ public class InstagramAuthUser {
     @JsonView({Views.Users.class, Views.InstagramAuthResponse.class})
     private String profile_picture;
     @Column
-    @JsonView({Views.Users.class, Views.InstagramAuthResponse.class})
+    @JsonView({Views.Users.class, Views.InstagramAuthResponse.class, Views.UserInfo.class})
     private String full_name;
 
     @Column

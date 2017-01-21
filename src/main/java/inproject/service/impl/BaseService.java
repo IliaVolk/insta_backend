@@ -32,6 +32,7 @@ abstract public class BaseService<T extends BaseEntity> implements Service<T, Lo
             case ADMIN:
                 return getRepository().findAll();
             case USER:
+                return getRepository().findAllByUserId(user.getId());
             case ANONYMOUS:
                 return getRepository().findAll(true);
         }

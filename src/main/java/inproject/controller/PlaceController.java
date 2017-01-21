@@ -27,16 +27,14 @@ public class PlaceController extends BaseController {
 
     @RequestMapping(method = RequestMethod.GET, params = "confirmed=false")
     @JsonView(Views.Places.class)
-    public List<Place> getAll(
-            HttpServletRequest request,
-            HttpServletResponse response){
-        if (getUser(request).getUserType() != UserType.ADMIN){
+    public List<Place> getAll(HttpServletRequest request,
+                              HttpServletResponse response) {
+        if (getUser(request).getUserType() != UserType.ADMIN) {
             response.setStatus(HttpStatus.SC_UNAUTHORIZED);
             return null;
         }
         return placeService.findAll(false);
     }
-
 
     @JsonView(Views.Places.class)
     @RequestMapping(method = RequestMethod.POST)
@@ -65,7 +63,6 @@ public class PlaceController extends BaseController {
                         HttpServletResponse response){
         if (getUser(request).getUserType() != UserType.ADMIN){
             response.setStatus(HttpStatus.SC_UNAUTHORIZED);
-            return null;
         }
         return placeService.update(id, confirmed);
     }

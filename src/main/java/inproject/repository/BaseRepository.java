@@ -9,4 +9,5 @@ import java.util.List;
 @NoRepositoryBean
 public interface BaseRepository<E> extends JpaRepository<E, Long> {
     List<E> findAll(@Param("confirmed")boolean confirmed);
+    List<E> findAllByUserId(@Param("id")Long id);
 }
