@@ -8,4 +8,5 @@ public class Views {
     public static class Places extends General{}
     public static class Users extends General{}
     public static class UserInfo{}
+    public static class InstagramAuthResponse{}
 }

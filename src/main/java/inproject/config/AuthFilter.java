@@ -23,41 +23,49 @@ public class AuthFilter extends OncePerRequestFilter {
     @Autowired
     UserRepository userRepository;
     private final static List<Long> ADMIN_ID = Arrays.asList(4315110671l);
+
+    private void setUserType(InstagramAuthUser user) {
+        if (ADMIN_ID.contains(user.getId())) {
+            user.setUserType(UserType.ADMIN);
+        } else {
+            user.setUserType(UserType.USER);
+        }
+    }
+
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
         String method = request.getMethod();
-        if (method.equals("OPTIONS")){
+        if (method.equals("OPTIONS")) {
             filterChain.doFilter(request, response);
             return;
-        }
-        if (method.equals("GET")){
-            InstagramAuthUser user = new InstagramAuthUser();
-            user.setUserType(UserType.ANONYMOUS);
-            request.setAttribute("user", user);
-            filterChain.doFilter(request, response);
-            return;
-        }
-        String authHeader = request.getHeader("Authorization");
-        try{
-            Long id = Long.parseLong(authHeader);
-            InstagramAuthUser user = userRepository.findOne(id);
-            if (user != null){
-                if (ADMIN_ID.contains(id)){
-                    user.setUserType(UserType.ADMIN);
-                }else{
-                    user.setUserType(UserType.USER);
-                }
-            }
-            request.setAttribute("user", user);
-            filterChain.doFilter(request, response);
-            return;
-        }catch (NumberFormatException e){
-            response.setStatus(HttpStatus.SC_UNAUTHORIZED);
-            response.getWriter().println("authHeader: "+authHeader + "\n" +e.getMessage());
         }
 
-        response.setStatus(HttpStatus.SC_UNAUTHORIZED);
+        String authHeader = request.getHeader("Authorization");
+        Long id = null;
+        InstagramAuthUser user = null;
+        try {
+            id = Long.parseLong(authHeader);
+        } catch (NumberFormatException e) {
+            if (method.equals("GET")){
+                user = new InstagramAuthUser();
+                user.setUserType(UserType.ANONYMOUS);
+                request.setAttribute("user", user);
+                filterChain.doFilter(request, response);
+                return;
+            }
+            response.setStatus(HttpStatus.SC_UNAUTHORIZED);
+            response.getWriter().println("authHeader: " + authHeader + "\n" + e.getMessage());
+        }
+        user = userRepository.findOne(id);
+        if (user != null) {
+            setUserType(user);
+        } else {
+            response.setStatus(HttpStatus.SC_UNAUTHORIZED);
+            return;
+        }
+        request.setAttribute("user", user);
+        filterChain.doFilter(request, response);
     }
 }

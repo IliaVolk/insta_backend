@@ -18,6 +18,7 @@ abstract public class BaseEntity  implements Serializable {
     protected Long id;
 
     @Column
+    @JsonView(Views.General.class)
     protected boolean confirmed;
 
     public Long getId() {

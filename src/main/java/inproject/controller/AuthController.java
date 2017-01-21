@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import inproject.entity.InstagramAuthResponse;
 import inproject.entity.InstagramAuthUser;
 import inproject.service.UserService;
+import inproject.view.Views;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -81,7 +82,7 @@ public class AuthController {
 
 
 
-        String json = mapper.writeValueAsString(responseObject);
+        String json = mapper.writerWithView(Views.InstagramAuthResponse.class).writeValueAsString(responseObject);
         return "<script>\n" +
                 "    var authCredentials = " + json+";\n"+
                 "    window.opener.postMessage(authCredentials, '"+FRONTEND_ORIGIN+"');\n"+

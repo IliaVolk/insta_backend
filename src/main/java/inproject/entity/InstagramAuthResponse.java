@@ -1,11 +1,19 @@
 package inproject.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonView;
+import inproject.view.Views;
+
 public class InstagramAuthResponse {
+    @JsonView(Views.InstagramAuthResponse.class)
     private String code;
+    @JsonView(Views.InstagramAuthResponse.class)
     private String access_token;
+    @JsonView(Views.InstagramAuthResponse.class)
     private InstagramAuthUser user;
+    @JsonView(Views.InstagramAuthResponse.class)
     private String error_message;
+    @JsonView(Views.InstagramAuthResponse.class)
     private String error_type;
 
 

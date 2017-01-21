@@ -18,6 +18,8 @@ abstract public class BaseService<T extends BaseEntity> implements Service<T, Lo
             case USER:
                 toAdd.setConfirmed(false);
                 break;
+            case ANONYMOUS:
+
         }
         return add(toAdd);
     }

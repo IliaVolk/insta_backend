@@ -12,15 +12,20 @@ import java.util.List;
 public class InstagramAuthUser {
 
     @Column
+    @JsonView(Views.InstagramAuthResponse.class)
     private String username;
 
     @Column
+    @JsonView(Views.InstagramAuthResponse.class)
     private String bio;
     @Column
+    @JsonView(Views.InstagramAuthResponse.class)
     private String website;
     @Column
+    @JsonView(Views.InstagramAuthResponse.class)
     private String profile_picture;
     @Column
+    @JsonView(Views.InstagramAuthResponse.class)
     private String full_name;
 
     @Transient
@@ -28,7 +33,7 @@ public class InstagramAuthUser {
 
 
     @Id
-    @JsonView(Views.General.class)
+    @JsonView({Views.General.class, Views.InstagramAuthResponse.class})
     private long id;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.MERGE)
